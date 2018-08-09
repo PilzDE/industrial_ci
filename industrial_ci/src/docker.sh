@@ -138,6 +138,10 @@ function ici_docker_build() {
   if [ "$DOCKER_PULL" != false ]; then
     opts+=("--pull")
   fi
+  echo "Building docker"
+  echo "$DOCKER_IMAGE"
+  echo "${opts[@]}"
+  echo "$@"
   docker build -t "$DOCKER_IMAGE" "${opts[@]}" "$@"
 }
 
@@ -211,7 +215,7 @@ EOF
   echo "Building image '$DOCKER_IMAGE':"
   local dockerfile=$(ici_generate_default_dockerfile)
   echo "$dockerfile"
-  ici_docker_build - <<< "$dockerfile" > /dev/null
+  ici_docker_build - <<< "$dockerfile"
 }
 
 function ici_generate_default_dockerfile() {
