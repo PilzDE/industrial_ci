@@ -42,8 +42,9 @@ function ici_require_run_in_docker() {
                           -v "$TARGET_REPO_PATH/:$docker_target_repo_path:ro" \
                           -v "$ICI_SRC_PATH/:$docker_ici_src_path:ro" \
                           -t \
+                          --entrypoint /bin/bash \
                           "$DOCKER_IMAGE" \
-                          /bin/bash $docker_ici_src_path/ci_main.sh
+                          $docker_ici_src_path/ci_main.sh
     exit
   fi
 }
